@@ -1,0 +1,24 @@
+language: php
+
+php:
+ - '5.6.7'
+
+install:
+ - travis_retry composer install --no-interaction --prefer-dist --no-suggest
+ - cp .env.travis .env # Create a new .env file
+ - php artisan key:generate # Generate application key
+
+sudo: false
+
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS laravelangular;'
+
+before_script:
+ - phantomjs --webdriver=127.0.0.1:9515 & # Start PhantomJS driver
+ - php artisan serve & # Start server
+ - sleep 5 # Give PhantomJS and Artisan time to start
+
+
+services: mysql
+
+script: php artisan dusk
