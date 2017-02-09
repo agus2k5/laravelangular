@@ -26,8 +26,10 @@ class ExampleTest extends DuskTestCase
             $titulo_addocente = 'Agregar nuevo Docente';
             $homepage = 'Aplicacion Laravel + Angular';
             $browser->visit('/')
+                    ->pause(1000)
                     ->click($button)
                     ->assertSee($titulo_addocente)
+                    ->pause(1000)
                     ->type('nombre', 'Dusk')
                     ->type('apellido','Duskman')
                     ->type('email','Duskman@gmail.com')
