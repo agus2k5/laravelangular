@@ -23,8 +23,3 @@ before_script:
 services: mysql
 
 script: php artisan dusk
-
-# deploy:
-#   provider: heroku
-#   api_key:
-#     secure: "e7987104-ca88-4b83-8123-ba19c0d7b056"
