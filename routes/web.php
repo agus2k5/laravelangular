@@ -16,4 +16,10 @@ Route::get('/', function () {
     return view('index');
 });
 
+//api docente
+Route::get('/api/docente/{id?}','DocenteController@index');
+Route::post('/api/docente','DocenteController@store');
+Route::post('/api/docente/{id}','DocenteController@update');
+Route::delete('/api/docente/{id}','DocenteController@destroy');
+//test
 Route::get('/api/prueba','DocenteController@prueba');
