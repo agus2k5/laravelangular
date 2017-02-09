@@ -21,20 +21,22 @@ class ExampleTest extends DuskTestCase
         // });
 
         $this->browse(function (Browser $browser) {
-            $save = '#btn-save';
-            $button = '#btn-add';
-            $titulo_addocente = 'Agregar nuevo Docente';
-            $homepage = 'Aplicacion Laravel + Angular';
-            $browser->visit('/')
-                    ->pause(1000)
-                    ->click($button)
-                    ->assertSee($titulo_addocente)
-                    ->pause(1000)
-                    ->type('nombre', 'Dusk')
-                    ->type('apellido','Duskman')
-                    ->type('email','Duskman@gmail.com')
-                    ->click($save)
-                    ->assertSee($homepage);
+            $browser->visit('/api/prueba')
+                    ->assertSee('esto es una prueba');
+            // $save = '#btn-save';
+            // $button = '#btn-add';
+            // $titulo_addocente = 'Agregar nuevo Docente';
+            // $homepage = 'Aplicacion Laravel + Angular';
+            // $browser->visit('/')
+            //         ->pause(1000)
+            //         ->click($button)
+            //         ->assertSee($titulo_addocente)
+            //         ->pause(1000)
+            //         ->type('nombre', 'Dusk')
+            //         ->type('apellido','Duskman')
+            //         ->type('email','Duskman@gmail.com')
+            //         ->click($save)
+            //         ->assertSee($homepage);
         });
     }
 }

@@ -104,4 +104,9 @@ class DocenteController extends Controller
         $docente = Docente::find($id)->delete();
         return 'registro de docente eliminado correctamente';
     }
+
+    public function prueba(){
+        return 'esto es una prueba';
+        //return json_encode('prueba' => 'esto es una prueba');
+    }
 }
