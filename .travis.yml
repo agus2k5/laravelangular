@@ -1,25 +1,24 @@
 language: php
-
 php:
- - '5.6.12'
-
+- 5.6.12
 install:
- - travis_retry composer install --no-interaction --prefer-dist --no-suggest
- - cp .env.travis .env # Create a new .env file
- - php artisan key:generate # Generate application key
- - php artisan migrate #create the tables on database
-
+- travis_retry composer install --no-interaction --prefer-dist --no-suggest
+- cp .env.travis .env
+- php artisan key:generate
+- php artisan migrate
 sudo: false
-
 before_install:
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS laravelangular;'
-
+- mysql -e 'CREATE DATABASE IF NOT EXISTS laravelangular;'
 before_script:
- - phantomjs --webdriver=127.0.0.1:9515 & # Start PhantomJS driver
- - php artisan serve --port=8081 & # Start server
- - sleep 5 # Give PhantomJS and Artisan time to start
-
-
+- phantomjs --webdriver=127.0.0.1:9515 &
+- php artisan serve --port=8081 &
+- sleep 5
 services: mysql
-
 script: php artisan dusk
+deploy:
+  provider: heroku
+  api_key:
+    secure: Oh7m5TDzpXMzxkyq9ZPF8sZV3sUS3o0KAxLPGyQFwYn8S2Y/vs0t9j89wuuK6hAzh527dStAa2Ay3x4+1L6Kg/uu6KIV4c/mcysMyKDxBWoyhv1OQkgejngNIKR7ui2tdBgGuV3bSQ4TxjbVnhmHqvxmsNk6cx7J8ErdWagLbigRiA1ljrwqAYG6tyv0b5FC8O+QyybyFxRMikOQxMXe9jyIL5hMr6G5ZBLIv/W1/Uu99Ug4p3ZijbyODDu62mkNRpb3GS1a5YIry3IHBq+fIevHFrAQDXob0l0sOIIcsiIbx7Spk+Tbbt8sbX5RTunZoogekjdGbOeS9ynFnDkNPXlYzWvpj3iwfpJMqvWDnQBxhDE1/wZT9g4ZTeV+M8xXaAEAHb9+F7THBn06FMog6SYCaLklSMHFhGRrsQ6H3eRon7Mmsab/r4bgKKrEN516jy2bxG6Kj/IF/LYuC74TDsSN70IADVsoQkZ8y2HrbNY8QgYAknu3xAljHlxhzWGwbMqJUu/0pbb46B6CPG7xIzOrdqNW0IRORy2mMkHHRy3b1BgbddmyoZm1jcyqaaXavQGBp1ltEiNvCHDPvhszvQRCxPLKwKWRVhR0SVBj2PCr7qsarJ8KNq2ZKcqwmWxNRXn9ppzRVc6WKq78oqdrw2a4PqX8A3V1cvfPiDk4xWc=
+  app: laravelangular
+  on:
+    repo: agus2k5/laravelangular
